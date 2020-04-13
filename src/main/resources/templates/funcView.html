@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionario</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(180deg, #A92E9D 0%, rgba(209, 209, 209, 0) 100%), #400072;
+        }
+
+        header {
+            background: rgb(72, 0, 75);
+            grid-area: h;
+        }
+        
+
+        main {
+            grid-area: m;
+        }
+
+        aside {
+            grid-area: a;
+        }
+
+        footer {
+            grid-area: f;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 2fr 2fr;
+            grid-template-rows: 8vh 80vh 11vh;
+            grid-gap:5px;
+            grid-template-areas:"h h"
+                                "m a"
+                                "f f"
+        }
+
+        .title {
+            display: grid;
+            grid-template-columns: 2fr 2fr;
+            justify-items: center;
+        }
+
+        .register-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 1fr 2fr 1fr;
+            justify-content: center;
+        }
+
+        .tableContainer {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 1fr 2fr 1fr;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #f1f1f1;
+        }
+
+        form {
+            grid-column: 2/3;
+            grid-row: 2/3;
+        }
+
+        input {
+            width: 450px;
+            padding: 15px;
+            margin: 5px 0 15px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+
+        input:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            opacity: 1;
+        }
+
+        tr:nth-child(even) {
+            background-color:rgb(63, 63, 63);
+        }
+
+        table {
+            grid-column: 2/3;
+            grid-row: 2/3;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 625px;
+            border: 0px solid #ddd;
+            background: black;
+            border-radius: 38px;
+        }
+
+        th, td{
+            color: white;
+            text-align: center;
+            padding: 16px;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title">
+                <h1>Cadastro de Funcionarios</h1>
+                <h1>Funcionarios Cadastrados</h1>
+            </div>
+        </header>
+            
+        <main class="register-container">
+            <form th:action="@{/}" method="POST">
+                <div>
+                    <input type="number" name="id"
+                        placeholder="ID"
+                    />
+    
+                    <input type="text" name="nome"
+                        placeholder="nome"
+                    />
+    
+                    <input type="text" name="cpf"
+                        placeholder="CPF"
+                    />
+    
+                    <input type="text" name="cargo"
+                        placeholder="cargo"
+                    />
+    
+                    <input type="text" name="salario"
+                        placeholder="salario"
+                    />
+                </div>
+                <button type="submit"> Cadastrar </button>
+            </form>
+        </main>
+
+        <aside class="tableContainer">
+            <table width="625px">
+                <thead>
+                    <tr>
+                        <th >ID</th>
+                        <th >Nome</th>
+                        <th >CPF</th>
+                        <th >Cargo</th>
+                        <th >Salario</th>
+                    </tr>
+                </thead>
+                    <tr th:each="funcionario:${funcionario}">
+                        <td th:text="${funcionario?.id}"/>
+                        <td th:text="${funcionario?.nome}"/>
+                        <td th:text="${funcionario?.cpf}"/>
+                        <td th:text="${funcionario?.cargo}"/>
+                        <td th:text="${funcionario?.salario}"/>
+                    </tr>
+            </table>
+        </aside>
+
+        <footer>
+        </footer>
+    </div>
+</body>
+</html>
